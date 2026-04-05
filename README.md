@@ -10,9 +10,10 @@
 
 | Скилл                                              | Описание                              |
 |----------------------------------------------------|---------------------------------------|
-| [`orm-table`](.claude/skills/orm-table/SKILL.md)   | Создать класс ORM DataManager таблицы |
-| [`cli-script`](.claude/skills/cli-script/SKILL.md) | Создать CLI-скрипт (php script.php)   |
-| [`migration`](.claude/skills/migration/SKILL.md)   | Создать миграцию sprint.migration     |
+| [`orm-table`](.claude/skills/orm-table/SKILL.md)         | Создать класс ORM DataManager таблицы |
+| [`cli-script`](.claude/skills/cli-script/SKILL.md)       | Создать CLI-скрипт (php script.php)   |
+| [`migration`](.claude/skills/migration/SKILL.md)         | Создать миграцию sprint.migration     |
+| [`module-init`](.claude/skills/module-init/SKILL.md)     | Создать скелет модуля                 |
 
 ## Установка
 
