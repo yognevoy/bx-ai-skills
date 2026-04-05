@@ -43,5 +43,6 @@ allowed-tools: Read Write Glob
 | `cli-script`      | Создать CLI-скрипт (php script.php)   |
 | `migration`       | Создать миграцию sprint.migration     |
 | `module-init`     | Создать скелет модуля                 |
+| `find-handlers`   | Найти обработчики события в проекте   |
 
 Документация: https://code.claude.com/docs/en/skills
