@@ -37,10 +37,11 @@ allowed-tools: Read Write Glob
 
 ## Доступные скиллы
 
-| Скилл        | Описание                              |
-|--------------|---------------------------------------|
-| `orm-table`  | Создать класс ORM DataManager таблицы |
-| `cli-script` | Создать CLI-скрипт (php script.php)   |
-| `migration`  | Создать миграцию sprint.migration     |
+| Скилл             | Описание                              |
+|-------------------|---------------------------------------|
+| `orm-table`       | Создать класс ORM DataManager таблицы |
+| `cli-script`      | Создать CLI-скрипт (php script.php)   |
+| `migration`       | Создать миграцию sprint.migration     |
+| `module-init`     | Создать скелет модуля                 |
 
 Документация: https://code.claude.com/docs/en/skills
