@@ -1,15 +1,18 @@
 ---
 name: migration
-description: Создаёт файл миграции sprint.migration. Используй когда нужно создать миграцию.
+description: >
+  Создаёт файл миграции sprint.migration. Используй когда нужно создать миграцию:
+  изменения таблиц, UF-поля, настройки модулей, агенты, почтовые события и шаблоны,
+  группы пользователей, инфоблоки, HL-блоки.
 argument-hint: "[номер тикета] [краткое описание]"
 allowed-tools: Bash Glob Read Write
 ---
 
 Создай миграцию sprint.migration. Аргументы: $ARGUMENTS
 
-Изучи примеры в `${CLAUDE_SKILL_DIR}/references/` — они задают стиль и паттерны кода.
+Изучи примеры в `${CLAUDE_SKILL_DIR}/references/` — они задают стиль кода.
 
-## Что уточнить у пользователя (если не указано в аргументах)
+## Что уточнить (если не указано в аргументах)
 
 1. **Номер тикета** — например `PROJ-123`
 2. **Краткое описание** — на русском, что делает миграция
@@ -30,7 +33,8 @@ allowed-tools: Bash Glob Read Write
 
 ## Версия модуля
 
-Перед заполнением `$moduleVersion` прочитай актуальную версию из `**/sprint.migration/install/version.php` (`$arModuleVersion['VERSION']`).
+Перед заполнением `$moduleVersion` прочитай актуальную версию из `**/sprint.migration/install/version.php` (
+`$arModuleVersion['VERSION']`).
 
 ## Helper-классы sprint.migration
 
