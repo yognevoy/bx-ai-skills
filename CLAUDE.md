@@ -44,5 +44,6 @@ allowed-tools: Read Write Glob
 | `migration`       | Создать миграцию sprint.migration     |
 | `module-init`     | Создать скелет модуля                 |
 | `find-handlers`   | Найти обработчики события в проекте   |
+| `explain-module`  | Объяснить назначение модуля           |
 
 Документация: https://code.claude.com/docs/en/skills
