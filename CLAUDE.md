@@ -41,5 +41,6 @@ allowed-tools: Read Write Glob
 |--------------|---------------------------------------|
 | `orm-table`  | Создать класс ORM DataManager таблицы |
 | `cli-script` | Создать CLI-скрипт (php script.php)   |
+| `migration`  | Создать миграцию sprint.migration     |
 
 Документация: https://code.claude.com/docs/en/skills
