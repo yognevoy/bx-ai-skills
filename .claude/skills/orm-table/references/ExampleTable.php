@@ -47,8 +47,7 @@ class ExampleTable extends Data\DataManager
                 ->configureDefaultValue(static function () {
                     return true;
                 }),
-            (new ArrayField('TAGS'))
-                ->configureColumnName('TAGS')
+            new ArrayField('TAGS')
                 ->addValidator(new LengthValidator(0, 65535)),
         ];
     }

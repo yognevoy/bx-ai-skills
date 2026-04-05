@@ -1,6 +1,8 @@
 ---
 name: orm-table
-description: Создаёт класс ORM DataManager таблицы. Используй когда нужно создать новую таблицу в БД.
+description: >
+  Создаёт класс ORM DataManager таблицы. Используй когда нужно
+  создать новую таблицу в БД.
 argument-hint: "[модуль] [ИмяСущности] [поля...]"
 allowed-tools: Read Write Glob
 ---
@@ -15,7 +17,7 @@ allowed-tools: Read Write Glob
 2. **Имя сущности** — например `ExampleEntity`
 3. **Поля** — список с типами и ограничениями
 
-Если чего-то не хватает — спроси перед генерацией.
+Спроси всё необходимое перед генерацией.
 
 ## Соглашения
 
@@ -28,20 +30,34 @@ allowed-tools: Read Write Glob
 
 - модуль `vendor.module`, сущность `ExampleEntity` → `vendor_module_example_entity`
 
-**Типы полей и configure-методы:**
+**Типы полей:**
 
-| Тип             | Методы                                                                 |
-|-----------------|------------------------------------------------------------------------|
-| `IntegerField`  | `configurePrimary()`, `configureAutocomplete()`, `configureNullable()` |
-| `StringField`   | `configureSize(int)`, `configureNullable()`                            |
-| `TextField`     | `configureNullable()`                                                  |
-| `DateField`     | `configureNullable()`                                                  |
-| `DatetimeField` | `configureNullable()`                                                  |
-| `BooleanField`  | `configureNullable()`, `configureDefaultValue(...)`                    |
-| `EnumField`     | `configureValues(array)`, `configureRequired()`, `configureNullable()` |
-| `ArrayField`    | `configureColumnName` + `LengthValidator` — см. `ExampleTable.php`     |
+| Тип             | Описание                        |
+|-----------------|---------------------------------|
+| `IntegerField`  | Целое число                     |
+| `StringField`   | Строка (VARCHAR)                |
+| `TextField`     | Длинный текст (TEXT)            |
+| `DateField`     | Дата                            |
+| `DatetimeField` | Дата и время                    |
+| `BooleanField`  | Булево значение                 |
+| `EnumField`     | Перечисление (значения из Enum) |
+| `ArrayField`    | Массив, сериализованный в TEXT  |
 
-**EnumField** — значения берутся через `getCases()` из Enum (см. `ExampleQueueTable.php` в references):
+**Методы конфигурации:**
+
+| Метод                     | Описание                                 |
+|---------------------------|------------------------------------------|
+| `configurePrimary()`      | Первичный ключ                           |
+| `configureAutocomplete()` | Автоинкремент                            |
+| `configureNullable()`     | Допускает NULL                           |
+| `configureRequired()`     | Обязательное поле (NOT NULL без дефолта) |
+| `configureSize(int)`      | Максимальная длина строки                |
+| `configureDefaultValue()` | Значение по умолчанию                    |
+| `configureValues(array)`  | Допустимые значения (для `EnumField`)    |
+
+### EnumField
+
+Значения берутся через `getCases()` из Enum (см. `ExampleQueueTable.php` в references):
 
 ```php
 (new EnumField('STATUS'))
