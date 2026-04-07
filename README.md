@@ -8,15 +8,16 @@
 
 ## Скиллы
 
-| Скилл                                              | Описание                              |
-|----------------------------------------------------|---------------------------------------|
-| [`orm-table`](.claude/skills/orm-table/SKILL.md)               | Создать класс ORM DataManager таблицы |
-| [`cli-script`](.claude/skills/cli-script/SKILL.md)             | Создать CLI-скрипт (php script.php)   |
-| [`migration`](.claude/skills/migration/SKILL.md)               | Создать миграцию sprint.migration     |
-| [`module-init`](.claude/skills/module-init/SKILL.md)           | Создать скелет модуля                 |
-| [`component-init`](.claude/skills/component-init/SKILL.md)     | Создать скелет компонента             |
-| [`find-handlers`](.claude/skills/find-handlers/SKILL.md)       | Найти обработчики события в проекте   |
-| [`explain-module`](.claude/skills/explain-module/SKILL.md)     | Объяснить назначение модуля           |
+| Скилл                                                      | Описание                              |
+|------------------------------------------------------------|---------------------------------------|
+| [`orm-table`](.claude/skills/orm-table/SKILL.md)           | Создать класс ORM DataManager таблицы |
+| [`cli-script`](.claude/skills/cli-script/SKILL.md)         | Создать CLI-скрипт (php script.php)   |
+| [`migration`](.claude/skills/migration/SKILL.md)           | Создать миграцию sprint.migration     |
+| [`module-init`](.claude/skills/module-init/SKILL.md)       | Создать скелет модуля                 |
+| [`component-init`](.claude/skills/component-init/SKILL.md) | Создать скелет компонента             |
+| [`extension-init`](.claude/skills/extension-init/SKILL.md) | Создать скелет JS-расширения          |
+| [`find-handlers`](.claude/skills/find-handlers/SKILL.md)   | Найти обработчики события в проекте   |
+| [`explain-module`](.claude/skills/explain-module/SKILL.md) | Объяснить назначение модуля           |
 
 ## Установка
 
