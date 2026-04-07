@@ -49,6 +49,7 @@ allowed-tools: Read Write Glob
 | `migration`       | Создать миграцию sprint.migration     |
 | `module-init`     | Создать скелет модуля                 |
 | `component-init`  | Создать скелет компонента             |
+| `extension-init`  | Создать скелет JS-расширения          |
 | `find-handlers`   | Найти обработчики события в проекте   |
 | `explain-module`  | Объяснить назначение модуля           |
 
