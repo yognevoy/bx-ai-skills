@@ -1,0 +1,3 @@
+<?php
+
+// $MESS['VENDOR_CATEGORY_EXAMPLE_EXTENSION_KEY'] = 'Значение';
