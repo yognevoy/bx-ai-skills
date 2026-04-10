@@ -50,3 +50,7 @@ allowed-tools: Read Write Edit Glob Grep
 | `$APPLICATION->set_cookie / get_cookie`         | `Cookie` + `getResponse()->addCookie` / `getCookie`   | `HttpRequest.php`  |
 | `$APPLICATION->GetCurPageParam` / `DeleteParam` | `Uri::addParams` / `deleteParams`                     | `HttpRequest.php`  |
 | `$DB->Query`                                    | `Application::getConnection()->query`                 | `Database.php`     |
+| `$USER->GetID()` / `IsAdmin()`                  | `CurrentUser::get()->getId()` / `isAdmin()`           | `CurrentUser.php`  |
+| `$_SESSION["key"]`                              | `Application::getInstance()->getSession()["key"]`     | `Session.php`      |
+| `CJSON::encode/decode` / `CUtil::PhpToJSObject` | `Json::encode` / `Json::decode`                       | `Json.php`         |
+| `MakeTimeStamp()` / `ConvertDateTime()`         | `new Date(...)` / `new DateTime(...)`                 | `DateTime.php`     |
