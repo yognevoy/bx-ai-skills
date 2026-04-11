@@ -4,14 +4,13 @@ namespace Vendor\Module\Tables;
 
 use Bitrix\Main\Engine\CurrentUser;
 use Bitrix\Main\ORM\Data;
-use Bitrix\Main\ORM\Fields\ArrayField;
-use Bitrix\Main\ORM\Fields\Validators\LengthValidator;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Fields\TextField;
 use Bitrix\Main\Type\DateTime;
+use Bitrix\Main\Web\Json;
 
 class ExampleTable extends Data\DataManager
 {
@@ -47,8 +46,20 @@ class ExampleTable extends Data\DataManager
                 ->configureDefaultValue(static function () {
                     return true;
                 }),
-            new ArrayField('TAGS')
-                ->addValidator(new LengthValidator(0, 65535)),
+            new TextField('TAGS')
+                ->configureNullable()
+                ->addSaveDataModifier([__CLASS__, 'encodeJson'])
+                ->addFetchDataModifier([__CLASS__, 'decodeJson']),
         ];
+    }
+
+    public static function encodeJson($value)
+    {
+        return $value !== null ? Json::encode($value) : null;
+    }
+
+    public static function decodeJson($value)
+    {
+        return $value !== null ? Json::decode($value) : null;
     }
 }
