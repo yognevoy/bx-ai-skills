@@ -1,63 +1,63 @@
 ---
 name: orm-table
 description: >
-  Создаёт класс ORM DataManager таблицы. Используй когда нужно
-  создать новую таблицу в БД.
-argument-hint: "[модуль] [ИмяСущности] [поля...]"
+  Creates an ORM DataManager table class. Use when a new database table
+  needs to be created.
+argument-hint: "[module] [EntityName] [fields...]"
 allowed-tools: Read Write Glob
 ---
 
-Создай ORM-таблицу. Аргументы: $ARGUMENTS
+Create an ORM table. Arguments: $ARGUMENTS
 
-Изучи примеры в `${CLAUDE_SKILL_DIR}/references/` — они задают стиль кода.
+Study the examples in `${CLAUDE_SKILL_DIR}/references/` — they define the expected code style.
 
-## Что уточнить (если не указано в аргументах)
+## Clarify before generating (if not provided in arguments)
 
-1. **Модуль** — например `vendor.module`
-2. **Имя сущности** — например `ExampleEntity`
-3. **Поля** — список с типами и ограничениями
+1. **Module** — e.g. `vendor.module`
+2. **Entity name** — e.g. `ExampleEntity`
+3. **Fields** — list with types and constraints
 
-Спроси всё необходимое перед генерацией.
+Ask for everything needed before generating.
 
-## Соглашения
+## Conventions
 
-**Namespace и путь** определяются по имени модуля:
+**Namespace and path** are derived from the module name:
 
-- `vendor.module` → namespace `Vendor\Module\Tables`, файл `lib/tables/`
-- `vendor.module.sub` → namespace `Vendor\Module\Sub\Tables`, файл `lib/tables/`
+- `vendor.module` → namespace `Vendor\Module\Tables`, file in `lib/tables/`
+- `vendor.module.sub` → namespace `Vendor\Module\Sub\Tables`, file in `lib/tables/`
 
-**Имя таблицы в БД** — `{vendor}_{module}_{entity}` в snake_case:
+**DB table name** — `{vendor}_{module}_{entity}` in snake_case:
 
-- модуль `vendor.module`, сущность `ExampleEntity` → `vendor_module_example_entity`
+- module `vendor.module`, entity `ExampleEntity` → `vendor_module_example_entity`
 
-**Типы полей:**
+**Field types:**
 
-| Тип             | Описание                        |
-|-----------------|---------------------------------|
-| `IntegerField`  | Целое число                     |
-| `StringField`   | Строка (VARCHAR)                |
-| `TextField`     | Длинный текст (TEXT)            |
-| `DateField`     | Дата                            |
-| `DatetimeField` | Дата и время                    |
-| `BooleanField`  | Булево значение                 |
-| `EnumField`     | Перечисление (значения из Enum) |
-| `ArrayField`    | Массив, сериализованный в TEXT  |
+| Type            | Description                          |
+|-----------------|--------------------------------------|
+| `IntegerField`  | Integer                              |
+| `StringField`   | String (VARCHAR)                     |
+| `TextField`     | Long text (TEXT)                     |
+| `DateField`     | Date                                 |
+| `DatetimeField` | Date and time                        |
+| `BooleanField`  | Boolean                              |
+| `EnumField`     | Enumeration (values from an Enum)    |
+| `ArrayField`    | Array serialized as TEXT             |
 
-**Методы конфигурации:**
+**Configuration methods:**
 
-| Метод                     | Описание                                 |
-|---------------------------|------------------------------------------|
-| `configurePrimary()`      | Первичный ключ                           |
-| `configureAutocomplete()` | Автоинкремент                            |
-| `configureNullable()`     | Допускает NULL                           |
-| `configureRequired()`     | Обязательное поле (NOT NULL без дефолта) |
-| `configureSize(int)`      | Максимальная длина строки                |
-| `configureDefaultValue()` | Значение по умолчанию                    |
-| `configureValues(array)`  | Допустимые значения (для `EnumField`)    |
+| Method                    | Description                                   |
+|---------------------------|-----------------------------------------------|
+| `configurePrimary()`      | Primary key                                   |
+| `configureAutocomplete()` | Auto-increment                                |
+| `configureNullable()`     | Allows NULL                                   |
+| `configureRequired()`     | Required field (NOT NULL without default)     |
+| `configureSize(int)`      | Maximum string length                         |
+| `configureDefaultValue()` | Default value                                 |
+| `configureValues(array)`  | Allowed values (for `EnumField`)              |
 
 ### EnumField
 
-Значения берутся через `getCases()` из Enum (см. `ExampleQueueTable.php` в references):
+Values are taken via `getCases()` from an Enum (see `ExampleQueueTable.php` in references):
 
 ```php
 (new EnumField('STATUS'))
@@ -65,7 +65,7 @@ allowed-tools: Read Write Glob
     ->configureRequired(),
 ```
 
-Сам enum должен реализовывать метод:
+The enum must implement the method:
 
 ```php
 public static function getCases(): array
@@ -74,9 +74,9 @@ public static function getCases(): array
 }
 ```
 
-## После генерации
+## After generation
 
-Напомни пользователю на выбор:
+Remind the user to choose one of:
 
-- добавить создание таблицы в инсталлер модуля (`install/index.php`)
-- создать миграцию через `sprint.migration`
+- Add table creation to the module installer (`install/index.php`)
+- Create a migration via `sprint.migration`

@@ -1,32 +1,32 @@
 ---
 name: bp-activity
 description: >
-  Создаёт активити БП. Используй когда нужно добавить новую активити в
-  дизайнер бизнес-процессов.
-argument-hint: "[namespace] [ActivityName] [описание] [свойства...]"
+  Creates a business process activity. Use when a new activity needs to be
+  added to the business process designer.
+argument-hint: "[namespace] [ActivityName] [description] [properties...]"
 allowed-tools: Read Write Glob
 ---
 
-Создай активити для дизайнера бизнес-процессов. Аргументы: $ARGUMENTS
+Create a business process designer activity. Arguments: $ARGUMENTS
 
-Изучи примеры в `${CLAUDE_SKILL_DIR}/references/` — они задают стиль кода.
+Study the examples in `${CLAUDE_SKILL_DIR}/references/` — they define the expected code style.
 
-## Что уточнить (если не указано в аргументах)
+## Clarify before generating (if not provided in arguments)
 
-1. **namespace** — поддиректория в `local/activities/`, например `vendor`
-2. **Имя активити** — CamelCase без суффикса Activity, например `SendNotification`
-3. **Краткое описание** — что делает активити (1–2 предложения)
-4. **Свойства** — список параметров, которые настраивает пользователь в дизайнере:
-    - имя свойства
-    - тип (`string`, `select`, `bool`, `int`, `user`, `date`, `datetime`)
-    - обязательное или нет
-    - для `select` — список значений
+1. **namespace** — subdirectory under `local/activities/`, e.g. `vendor`
+2. **Activity name** — CamelCase without the `Activity` suffix, e.g. `SendNotification`
+3. **Short description** — what the activity does (1–2 sentences)
+4. **Properties** — list of parameters the user configures in the designer:
+    - property name
+    - type (`string`, `select`, `bool`, `int`, `user`, `date`, `datetime`)
+    - required or not
+    - for `select` — list of options
 
-Спроси всё необходимое перед генерацией.
+Ask for everything needed before generating.
 
-## Соглашения
+## Conventions
 
-### Размещение файлов
+### File layout
 
 ```
 local/activities/{namespace}/{activityname}/
@@ -38,62 +38,55 @@ local/activities/{namespace}/{activityname}/
         {activityname}.php
 ```
 
-- `{activityname}` — имя в **нижнем регистре** без пробелов: `sendnotificationactivity`
-- Директория называется так же, как файл класса
+- `{activityname}` — **lowercase**, no spaces: `sendnotificationactivity`
+- The directory name matches the class file name
 
-### Именование
+### Naming
 
-| Сущность         | Правило                                           | Пример                        |
-|------------------|---------------------------------------------------|-------------------------------|
-| Имя директории   | нижний регистр, слитно, с суффиксом `activity`    | `sendnotificationactivity`    |
-| Имя PHP-класса   | `CBP` + CamelCase + `Activity`                    | `CBPSendNotificationActivity` |
-| Значение `CLASS` | CamelCase + `Activity` (без `CBP`)                | `SendNotificationActivity`    |
-| Lang-префикс     | `BP` + аббревиатура из заглавных букв имени + `_` | `BPSNA_`                      |
+| Entity           | Rule                                                    | Example                       |
+|------------------|---------------------------------------------------------|-------------------------------|
+| Directory name   | lowercase, concatenated, with `activity` suffix         | `sendnotificationactivity`    |
+| PHP class name   | `CBP` + CamelCase + `Activity`                          | `CBPSendNotificationActivity` |
+| `CLASS` value    | CamelCase + `Activity` (without `CBP`)                  | `SendNotificationActivity`    |
+| Lang prefix      | `BP` + initials of the activity name words + `_`        | `BPSNA_`                      |
 
-### Lang-префикс
+### Lang prefix
 
-Образуется из заглавных букв слов имени активити:
+Formed from the uppercase initials of the activity name words:
 
-- `SendNotificationActivity` → `SNA` → префикс `BPSNA_`
-- `UpdateEntityStatusActivity` → `UESA` → префикс `BPUESA_`
+- `SendNotificationActivity` → `SNA` → prefix `BPSNA_`
+- `UpdateEntityStatusActivity` → `UESA` → prefix `BPUESA_`
 
-### Обязательные lang-ключи
+### Required lang keys
 
 ```
-{PREFIX}DESCR_NAME              — название в палитре дизайнера БП
-{PREFIX}DESCR_DESCR             — описание в палитре дизайнера БП
-{PREFIX}DESCR_{activityname}    — метка результата в трекинге (опционально)
-{PREFIX}PD_{PROPERTY}           — подпись каждого поля в диалоге
-{PREFIX}EMPTY_{PROPERTY}        — сообщение при ошибке валидации (для Required-полей)
-{PREFIX}ACTIVITY_RESULT_SUCCESS — успешное завершение (пишется в трекинг)
-{PREFIX}ACTIVITY_RESULT_ERROR   — ошибка (пишется в трекинг)
+{PREFIX}DESCR_NAME              — name shown in the BP designer palette
+{PREFIX}DESCR_DESCR             — description shown in the BP designer palette
+{PREFIX}DESCR_{activityname}    — tracking result label (optional)
+{PREFIX}PD_{PROPERTY}           — label for each field in the dialog
+{PREFIX}EMPTY_{PROPERTY}        — validation error message (for Required fields)
+{PREFIX}ACTIVITY_RESULT_SUCCESS — successful completion (written to tracking)
+{PREFIX}ACTIVITY_RESULT_ERROR   — error (written to tracking)
 ```
 
-## Типы полей (`getPropertiesMap`)
+## Field types (`getPropertiesMap`)
 
-| Тип        | Описание                                                      | Дополнительные ключи                      |
-|------------|---------------------------------------------------------------|-------------------------------------------|
-| `string`   | Произвольная строка, поддерживает подстановку полей документа | `Default`                                 |
-| `text`     | Многострочный текст                                           | `Default`                                 |
-| `bool`     | Чекбокс, значение `'Y'` / `'N'`                               | `Default` (`'Y'` или `'N'`)               |
-| `int`      | Целое число                                                   | `Default`                                 |
-| `double`   | Дробное число                                                 | `Default`                                 |
-| `select`   | Выпадающий список                                             | `Options` (массив), `Multiple`, `Default` |
-| `user`     | Выбор пользователя из оргструктуры                            | `Multiple`                                |
-| `date`     | Дата                                                          | `Default`                                 |
-| `datetime` | Дата и время                                                  | `Default`                                 |
-| `file`     | Файл                                                          | —                                         |
+| Type       | Description                                              | Extra keys                                |
+|------------|----------------------------------------------------------|-------------------------------------------|
+| `string`   | Arbitrary string, supports document field substitution   | `Default`                                 |
+| `text`     | Multi-line text                                          | `Default`                                 |
+| `bool`     | Checkbox, value `'Y'` / `'N'`                            | `Default` (`'Y'` or `'N'`)                |
+| `int`      | Integer                                                  | `Default`                                 |
+| `double`   | Decimal number                                           | `Default`                                 |
+| `select`   | Dropdown list                                            | `Options` (array), `Multiple`, `Default`  |
+| `user`     | User selection from org structure                        | `Multiple`                                |
+| `date`     | Date                                                     | `Default`                                 |
+| `datetime` | Date and time                                            | `Default`                                 |
+| `file`     | File                                                     | —                                         |
 
-Каждое поле в `getPropertiesMap` обязательно содержит:
+Every entry in `getPropertiesMap` must include:
 
-- `Name` — локализованное название (`Loc::getMessage(...)`)
-- `FieldName` — snake_case, уникально в рамках активити
-- `Type` — тип из таблицы выше
-- `Required` — `true` или `false`
-
-## После генерации
-
-Напомни пользователю:
-
-- Очистить кеш после добавления файлов
-- Активити появится в палитре дизайнера БП в категории, указанной в `.description.php`
+- `Name` — localized label (`Loc::getMessage(...)`)
+- `FieldName` — snake_case, unique within the activity
+- `Type` — type from the table above
+- `Required` — `true` or `false`

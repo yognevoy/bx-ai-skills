@@ -1,61 +1,60 @@
 ---
 name: module-init
 description: >
-  Создаёт скелет модуля.
-  Используй когда нужно создать новый модуль с нуля.
-argument-hint: "[vendor.modulename] [название] [описание] [партнёр] [url партнёра]"
+  Creates a module skeleton.
+  Use when a new module needs to be created from scratch.
+argument-hint: "[vendor.modulename] [name] [description] [partner] [partner url]"
 allowed-tools: Bash Glob Read Write
 ---
 
-Создай скелет модуля. Аргументы: $ARGUMENTS
+Create a module skeleton. Arguments: $ARGUMENTS
 
-Изучи примеры в `${CLAUDE_SKILL_DIR}/references/vendor.example/` — они задают точный стиль и структуру файлов.
+Study the examples in `${CLAUDE_SKILL_DIR}/references/vendor.example/` — they define the exact file style and structure.
 
-## Что уточнить (если не указано в аргументах)
+## Clarify before generating (if not provided in arguments)
 
-1. **Код модуля** — в формате `vendor.modulename`
-2. **Название модуля** — на русском, отображается в админке
-3. **Описание модуля** — на русском, краткое
-4. **Название партнёра**
-5. **URL партнёра**
+1. **Module code** — in `vendor.modulename` format
+2. **Module name** — shown in the admin panel
+3. **Module description** — brief
+4. **Partner name**
+5. **Partner URL**
 
-Спроси всё необходимое перед генерацией.
+Ask for everything needed before generating.
 
-## Правила генерации
+## Generation rules
 
-### Из кода модуля `vendor.modulename` вывести:
+### Derive from module code `vendor.modulename`:
 
-- **Имя PHP-класса**: заменить `.` на `_`, например `vendor_modulename`
-- **Префикс констант**: UPPER_CASE от имени класса, например `VENDOR_MODULENAME`
-- **Неймспейс**: каждую часть через `_` привести к PascalCase, например `\Vendor\Modulename`
-    - Каждый сегмент после `.` — новый уровень неймспейса (`vendor.foo.bar` → `\Vendor\Foo\Bar`)
-- **Неймспейс контроллеров**: `\Vendor\Modulename\App\Controller`
+- **PHP class name**: replace `.` with `_`, e.g. `vendor_modulename`
+- **Constants prefix**: UPPER_CASE of the class name, e.g. `VENDOR_MODULENAME`
+- **Namespace**: convert each `_`-separated part to PascalCase, e.g. `\Vendor\Modulename`
+    - Each segment after `.` becomes a new namespace level (`vendor.foo.bar` → `\Vendor\Foo\Bar`)
+- **Controllers namespace**: `\Vendor\Modulename\App\Controller`
 
-### Версия модуля
+### Module version
 
-В `install/version.php` используй текущую дату в формате `YYYY-MM-DD 09:00:00`. Получи текущую дату командой
+In `install/version.php` use the current date in `YYYY-MM-DD 09:00:00` format. Get the current date with
 `date +%Y-%m-%d`.
 
-### Структура файлов
+### File structure
 
 ```
 {vendor.modulename}/
 ├── install/
-│   ├── index.php       — класс установки/удаления модуля
-│   └── version.php     — версия 1.0.0 и текущая дата
+│   ├── index.php       — module install/uninstall class
+│   └── version.php     — version 1.0.0 and current date
 ├── lang/
 │   └── ru/
 │       └── install/
-│           └── index.php   — языковые переменные (название, описание, партнёр)
-├── .settings.php       — пустой список services, неймспейс для controllers
-└── include.php         — только открывающий и закрывающий теги <?php
+│           └── index.php   — language variables (name, description, partner)
+├── .settings.php       — empty services list, namespace for controllers
+└── include.php         — opening PHP tag only
 ```
 
-## Куда сохранять
+## Where to save
 
-Найди директорию модулей через Glob (`**/modules/`) и создай папку `{vendor.modulename}/` рядом с существующими
-модулями.
+Find the modules directory via Glob (`**/modules/`) and create the `{vendor.modulename}/` folder next to existing modules.
 
-## После генерации
+## After generation
 
-Выведи дерево созданных файлов и полный путь к корню модуля.
+Print the file tree of created files and the full path to the module root.

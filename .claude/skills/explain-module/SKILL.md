@@ -1,57 +1,57 @@
 ---
 name: explain-module
 description: >
-  Объясняет назначение модуля Bitrix24.
-  Используй когда нужно понять что делает модуль, его структуру и ключевые возможности.
+  Explains the purpose of a module.
+  Use when you need to understand what a module does, its structure, and key capabilities.
 argument-hint: "[vendor.modulename]"
 allowed-tools: Read Glob Grep
 ---
 
-Объясни назначение модуля. Аргументы: $ARGUMENTS
+Explain the purpose of the module. Arguments: $ARGUMENTS
 
-## Что уточнить (если не указано в аргументах)
+## Clarify before starting (if not provided in arguments)
 
-1. **Код модуля** — в формате `vendor.modulename`
+1. **Module code** — in `vendor.modulename` format
 
-## Как найти модуль
+## How to find the module
 
-Используй Glob для поиска файла `**/modules/<имя>/install/index.php`, где `<имя>` — код модуля из аргументов.
+Use Glob to find `**/modules/<name>/install/index.php`, where `<name>` is the module code from arguments.
 
-## Что читать
+## What to read
 
-1. **`lang/ru/install/index.php`** — официальное название и описание модуля
-2. **`install/index.php`** — что регистрируется при установке: таблицы, агенты, события, компоненты
-3. **`.settings.php`** — REST-контроллеры (секция `controllers`) и сервисы DI-контейнера (секция `services`)
-4. **`include.php`** — что подключается при старте модуля
-5. **`lib/`** — через Glob найди и прочитай классы агентов, обработчиков событий и ORM-таблиц.
+1. **`lang/ru/install/index.php`** — official module name and description
+2. **`install/index.php`** — what gets registered on install: tables, agents, events, components
+3. **`.settings.php`** — REST controllers (`controllers` section) and DI container services (`services` section)
+4. **`include.php`** — what is loaded when the module starts
+5. **`lib/`** — use Glob to find and read agent classes, event handler classes, and ORM table classes
 
-Если каких-то файлов нет — пропусти.
+Skip any files that don't exist.
 
-## Что показать в ответе
+## What to include in the response
 
-### Назначение
-1-2 предложения: что делает модуль и для чего используется.
+### Purpose
+1–2 sentences: what the module does and what it is used for.
 
-### Ключевые возможности
-Маркированный список: что регистрирует/предоставляет модуль (компоненты, агенты, обработчики событий, REST-методы, сервисы).
+### Key capabilities
+Bulleted list: what the module registers or provides (components, agents, event handlers, REST methods, services).
 
-### Структура кода
-Краткий обзор пространств имён и основных классов из `lib/`.
+### Code structure
+Brief overview of namespaces and main classes from `lib/`.
 
-### Таблицы
-Таблицы БД с кратким описанием хранимых данных.
+### Tables
+Database tables with a short description of stored data.
 
-### Агенты
-Список агентов с интервалом запуска и кратким описанием, что делает каждый.
+### Agents
+List of agents with run interval and brief description of what each does.
 
-### Обработчики событий
-Список событий, которые слушает модуль, с описанием, что происходит в обработчике.
+### Event handlers
+List of events the module listens to, with a description of what each handler does.
 
-### Зависимости
-Список модулей, от которых зависит.
+### Dependencies
+List of modules this module depends on.
 
-## Если модуль не найден
+## If the module is not found
 
-Сообщи явно и предложи:
-- Проверить правильность кода модуля
-- Поискать по частичному имени через Glob (`**/*{часть_имени}*/`)
+State it explicitly and suggest:
+- Checking the module code for typos
+- Searching by partial name via Glob (`**/*{partial_name}*/`)

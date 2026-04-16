@@ -1,29 +1,29 @@
 ---
 name: migrate-to-d7
 description: >
-  Переписывает устаревший API старого ядра на современный D7. Используй когда
-  нужно заменить CModule, COption, CPHPCache, AddEventHandler, CEvent, $DB, $APPLICATION и другие
-  устаревшие классы и функции на их аналоги в новом ядре D7.
-argument-hint: "[файл или фрагмент кода]"
+  Rewrites legacy kernel API to modern D7. Use when CModule, COption, CPHPCache,
+  AddEventHandler, CEvent, $DB, $APPLICATION and other deprecated classes and functions
+  need to be replaced with their D7 equivalents.
+argument-hint: "[file path or code snippet]"
 allowed-tools: Read Write Edit Glob Grep
 ---
 
-Перепиши устаревший API на D7. Аргументы: $ARGUMENTS
+Rewrite legacy API to D7. Arguments: $ARGUMENTS
 
-Изучи примеры в `${CLAUDE_SKILL_DIR}/references/` — они содержат парные примеры по каждой теме.
+Study the examples in `${CLAUDE_SKILL_DIR}/references/` — they contain paired before/after examples for each topic.
 
-## Порядок работы
+## Steps
 
-1. Если передан путь к файлу — прочитай его. Если передан фрагмент кода — работай с ним.
-2. Найди все устаревшие конструкции по таблице ниже.
-3. Замени каждую на D7-аналог согласно примерам в `references/`.
-4. Добавь `use`-импорты в начало файла (без дублей).
-5. Убери `global $APPLICATION`, `global $DB` там, где они больше не нужны.
-6. Покажи итоговый код и кратко перечисли, что было изменено.
+1. If a file path is provided — read it. If a code snippet is provided — work with it directly.
+2. Find all deprecated constructs using the table below.
+3. Replace each one with its D7 equivalent following the examples in `references/`.
+4. Add `use` imports at the top of the file (no duplicates).
+5. Remove `global $APPLICATION`, `global $DB` where they are no longer needed.
+6. Show the resulting code and briefly list what was changed.
 
-## Таблица замен
+## Replacement table
 
-| Устаревшее                                      | D7-аналог                                             | Reference          |
+| Legacy                                          | D7 equivalent                                         | Reference          |
 |-------------------------------------------------|-------------------------------------------------------|--------------------|
 | `CModule::IncludeModule`                        | `Loader::includeModule`                               | `ModuleLoader.php` |
 | `CModule::IncludeModuleEx`                      | `Loader::includeSharewareModule`                      | `ModuleLoader.php` |

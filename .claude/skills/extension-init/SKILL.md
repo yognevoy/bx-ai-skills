@@ -1,35 +1,35 @@
 ---
 name: extension-init
 description: >
-  Создаёт скелет JS-расширения.
-  Используй когда нужно создать новое JS-расширение с нуля.
-argument-hint: "[namespace] [описание]"
+  Creates a JS extension skeleton.
+  Use when a new JS extension needs to be created from scratch.
+argument-hint: "[namespace] [description]"
 allowed-tools: Bash Glob Read Write
 ---
 
-Создай скелет JS-расширения. Аргументы: $ARGUMENTS
+Create a JS extension skeleton. Arguments: $ARGUMENTS
 
-Изучи примеры в `${CLAUDE_SKILL_DIR}/references/module/example-extension/` — они задают точный стиль и структуру файлов.
+Study the examples in `${CLAUDE_SKILL_DIR}/references/module/example-extension/` — they define the exact file style and structure.
 
-## Что уточнить (если не указано в аргументах)
+## Clarify before generating (if not provided in arguments)
 
-1. **Namespace** — путь в пространстве имён BX, например `Vendor.Module.Feature`
-2. **Описание** — что делает расширение, одной строкой
+1. **Namespace** — path in the BX namespace, e.g. `Vendor.Module.Feature`
+2. **Description** — what the extension does, one line
 
-Спроси всё необходимое перед генерацией.
+Ask for everything needed before generating.
 
-## Правила генерации
+## Generation rules
 
-### Из namespace вывести:
+### Derive from namespace:
 
-- **Директория расширения**: сегменты после первого в kebab-case, разделённые `/`,
-  например `Vendor.Module.Feature` → `module/feature/`
-- **Имя главного JS-класса**: последний сегмент namespace, например `Feature`
-- **namespace в bundle.config.js**: добавить префикс `BX.`, например `BX.Vendor.Module`
-  (без последнего сегмента — он экспортируется внутри index.js)
-- **Ключи в lang/ru/config.php**: все сегменты в UPPER_SNAKE_CASE
+- **Extension directory**: segments after the first, in kebab-case, joined by `/`,
+  e.g. `Vendor.Module.Feature` → `module/feature/`
+- **Main JS class name**: last namespace segment, e.g. `Feature`
+- **namespace in bundle.config.js**: prepend `BX.`, e.g. `BX.Vendor.Module`
+  (without the last segment — it is exported inside index.js)
+- **Keys in lang/ru/config.php**: all segments in UPPER_SNAKE_CASE
 
-### Структура файлов
+### File structure
 
 ```
 {module}/{extension-name}/
@@ -46,45 +46,45 @@ allowed-tools: Bash Glob Read Write
 
 ### config.php
 
-- `js` и `css` всегда указывают на `dist/bundle.js` и `dist/bundle.css`
-- `rel` — зависимости от других расширений (минимум `main.core`)
-- `lang` — всегда `'lang/' . LANGUAGE_ID . '/configphp'`
+- `js` and `css` always point to `dist/bundle.js` and `dist/bundle.css`
+- `rel` — dependencies on other extensions (at minimum `main.core`)
+- `lang` — always `'lang/' . LANGUAGE_ID . '/config.php'`
 
 ### bundle.config.js
 
-- `input` всегда `'src/index.js'`
-- `output` — строка `'dist/bundle.js'` (если есть CSS — объект с `js` и `css`)
-- `namespace` — `BX.Vendor.{...}` (родительский namespace, без имени класса)
-- `minification` всегда `false`
+- `input` always `'src/index.js'`
+- `output` — string `'dist/bundle.js'` (if CSS is present — object with `js` and `css`)
+- `namespace` — `BX.Vendor.{...}` (parent namespace, without the class name)
+- `minification` always `false`
 
 ### src/index.js
 
-- Импортирует главный класс из `./{ClassName}`
-- Вызывает `BX.namespace(...)` с полным namespace (без имени класса)
-- Оборачивает инициализацию в `BX.ready()`
-- Проверяет `hasOwnProperty` перед назначением
-- Вызывает `{ClassName}.create()` для инициализации
+- Imports the main class from `./{ClassName}`
+- Calls `BX.namespace(...)` with the full namespace (without the class name)
+- Wraps initialization in `BX.ready()`
+- Checks `hasOwnProperty` before assigning
+- Calls `{ClassName}.create()` to initialize
 
 ### src/{ClassName}.js
 
-- ES6-класс с `constructor(props = {})`
-- Метод `init()` для инициализации логики
-- Конструктор вызывает `this.init()`
-- Статический метод `static create(props = {}) { return new this(props); }`
-- Если нужны AJAX-запросы — метод `runAction(action, data = {})` через `BX.ajax.runAction`
+- ES6 class with `constructor(props = {})`
+- `init()` method for initialization logic
+- Constructor calls `this.init()`
+- Static method `static create(props = {}) { return new this(props); }`
+- If AJAX requests are needed — `runAction(action, data = {})` method via `BX.ajax.runAction`
 
 ### src/style.css
 
-- Пустой файл или минимальные стили с классами, основанными на имени расширения
+- Empty file or minimal styles with classes based on the extension name
 
 ### lang/ru/config.php
 
-- Пустой файл с заглушкой-комментарием, если языковые ключи не известны заранее
+- Empty file with a placeholder comment if lang keys are not known in advance
 
-## Куда сохранять
+## Where to save
 
-Найди директорию JS-расширений через Glob (`**/local/js/`) и создай папку расширения внутри неё.
+Find the JS extensions directory via Glob (`**/local/js/`) and create the extension folder inside it.
 
-## После генерации
+## After generation
 
-Выведи дерево созданных файлов и полный путь к корню расширения.
+Print the file tree of created files and the full path to the extension root.

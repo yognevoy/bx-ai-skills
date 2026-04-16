@@ -1,34 +1,34 @@
 ---
 name: component-init
 description: >
-  Создаёт скелет компонента.
-  Используй когда нужно создать новый компонент с нуля.
-argument-hint: "[vendor:component.name] [описание]"
+  Creates a component skeleton.
+  Use when a new component needs to be created from scratch.
+argument-hint: "[vendor:component.name] [description]"
 allowed-tools: Bash Glob Read Write
 ---
 
-Создай скелет компонента. Аргументы: $ARGUMENTS
+Create a component skeleton. Arguments: $ARGUMENTS
 
-Изучи примеры в `${CLAUDE_SKILL_DIR}/references/vendor/example/` — они задают точный стиль и структуру файлов.
+Study the examples in `${CLAUDE_SKILL_DIR}/references/vendor/example/` — they define the exact file style and structure.
 
-## Что уточнить (если не указано в аргументах)
+## Clarify before generating (if not provided in arguments)
 
-1. **Код компонента** — в формате `vendor:component.name`
-2. **Описание** — что делает компонент, одной строкой
+1. **Component code** — in `vendor:component.name` format
+2. **Description** — what the component does, one line
 
-Спроси всё необходимое перед генерацией.
+Ask for everything needed before generating.
 
-## Правила генерации
+## Generation rules
 
-### Из кода компонента `vendor:component.name` вывести:
+### Derive from component code `vendor:component.name`:
 
-- **Папка вендора**: часть до `:`, например `vendor`
-- **Папка компонента**: часть после `:`, например `component.name`
-- **Имя PHP-класса компонента**: каждый сегмент (`.`) привести к PascalCase и соединить + `Component`,
-  например `vendor:my.component` → `VendorMyComponentComponent`
-- **Имя PHP-класса контроллера**: то же самое, но + `Controller`
+- **Vendor folder**: part before `:`, e.g. `vendor`
+- **Component folder**: part after `:`, e.g. `component.name`
+- **Component PHP class name**: convert each segment (`.`) to PascalCase, join, append `Component`,
+  e.g. `vendor:my.component` → `VendorMyComponentComponent`
+- **Controller PHP class name**: same, but append `Controller`
 
-### Структура файлов
+### File structure
 
 ```
 {vendor}/
@@ -51,11 +51,11 @@ allowed-tools: Bash Glob Read Write
             └── component_epilog.php
 ```
 
-## Куда сохранять
+## Where to save
 
-Найди директорию компонентов через Glob (`**/components/`) и создай папку `{vendor}/{component.name}/` рядом с
-существующими компонентами.
+Find the components directory via Glob (`**/components/`) and create the `{vendor}/{component.name}/` folder
+next to existing components.
 
-## После генерации
+## After generation
 
-Выведи дерево созданных файлов и полный путь к корню компонента.
+Print the file tree of created files and the full path to the component root.

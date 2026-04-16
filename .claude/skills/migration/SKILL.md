@@ -1,64 +1,64 @@
 ---
 name: migration
 description: >
-  Создаёт файл миграции sprint.migration. Используй когда нужно создать миграцию:
-  изменения таблиц, UF-поля, настройки модулей, агенты, почтовые события и шаблоны,
-  группы пользователей, инфоблоки, HL-блоки, регистрация обработчиков событий.
-argument-hint: "[номер тикета] [краткое описание]"
+  Creates a sprint.migration file. Use when a migration is needed:
+  table changes, UF fields, module settings, agents, mail events and templates,
+  user groups, iblocks, HL-blocks, event handler registration.
+argument-hint: "[ticket number] [short description]"
 allowed-tools: Bash Glob Read Write
 ---
 
-Создай миграцию sprint.migration. Аргументы: $ARGUMENTS
+Create a sprint.migration file. Arguments: $ARGUMENTS
 
-Изучи примеры в `${CLAUDE_SKILL_DIR}/references/` — они задают стиль кода.
+Study the examples in `${CLAUDE_SKILL_DIR}/references/` — they define the expected code style.
 
-## Что уточнить (если не указано в аргументах)
+## Clarify before generating (if not provided in arguments)
 
-1. **Номер тикета** — например `PROJ-123`
-2. **Краткое описание** — на русском, что делает миграция
-3. **Тип миграции** — DDL (ALTER/CREATE TABLE), установка модуля, UF-поле, другое
-4. **Автор** — логин пользователя в системе
+1. **Ticket number** — e.g. `PROJ-123`
+2. **Short description** — what the migration does
+3. **Migration type** — DDL (ALTER/CREATE TABLE), module install, UF field, other
+4. **Author** — user login in the system
 
-Спроси всё необходимое перед генерацией.
+Ask for everything needed before generating.
 
-## Правила именования
+## Naming rules
 
-Из тикета `PROJ-123` и описания `example description`:
+From ticket `PROJ-123` and description `example description`:
 
-- Получи текущее время: `date +%Y%m%d%H%M%S`
-- Имя файла: `PROJ_123_exampleDescription20260405120000.php`
-- Имя класса = имя файла без `.php`
+- Get current time: `date +%Y%m%d%H%M%S`
+- Filename: `PROJ_123_exampleDescription20260405120000.php`
+- Class name = filename without `.php`
 
-Описание в имени файла — camelCase, латиница, без пробелов, кратко (2–3 слова).
+Description in the filename — camelCase, Latin characters, no spaces, brief (2–3 words).
 
-## Версия модуля
+## Module version
 
-Перед заполнением `$moduleVersion` прочитай актуальную версию из `**/sprint.migration/install/version.php` (
-`$arModuleVersion['VERSION']`).
+Before filling `$moduleVersion`, read the current version from `**/sprint.migration/install/version.php`
+(`$arModuleVersion['VERSION']`).
 
-## Helper-классы sprint.migration
+## sprint.migration helper classes
 
-Перед написанием кода найди модуль sprint.migration через Glob (`**/sprint.migration/lib/helpers/*.php`) и проверь, есть
-ли подходящий Helper. Доступ через `$this->getHelperManager()->HelperName()`.
+Before writing code, find the sprint.migration module via Glob (`**/sprint.migration/lib/helpers/*.php`) and check
+if a suitable Helper exists. Access via `$this->getHelperManager()->HelperName()`.
 
-Основные хелперы:
+Main helpers:
 
-| Метод              | Что делает                                                        |
+| Method             | What it does                                                      |
 |--------------------|-------------------------------------------------------------------|
-| `UserTypeEntity()` | UF-поля: `saveUserTypeEntity()`, `deleteUserTypeEntityIfExists()` |
-| `Agent()`          | Агенты: `saveAgent()`, `deleteAgentIfExists()`                    |
-| `Option()`         | Опции модулей: `saveOption()`, `deleteOptions()`                  |
-| `Event()`          | Почтовые события и шаблоны                                        |
-| `UserGroup()`      | Группы: `saveGroup()`, `getGroupId()`                             |
-| `IBlock()`         | Инфоблоки, типы, свойства                                         |
-| `HLBlock()`        | HL-блоки                                                          |
+| `UserTypeEntity()` | UF fields: `saveUserTypeEntity()`, `deleteUserTypeEntityIfExists()` |
+| `Agent()`          | Agents: `saveAgent()`, `deleteAgentIfExists()`                    |
+| `Option()`         | Module options: `saveOption()`, `deleteOptions()`                 |
+| `Event()`          | Mail events and templates                                         |
+| `UserGroup()`      | Groups: `saveGroup()`, `getGroupId()`                             |
+| `IBlock()`         | Iblocks, types, properties                                        |
+| `HLBlock()`        | HL-blocks                                                         |
 
-Если подходящий Helper есть — используй его вместо прямых API-вызовов.
+If a suitable Helper exists — use it instead of direct API calls.
 
-## Куда сохранять
+## Where to save
 
-Найди директорию миграций через Glob (`**/migrations/PROJ_*.php`) и сохрани рядом с существующими файлами.
+Find the migrations directory via Glob (`**/migrations/PROJ_*.php`) and save next to existing files.
 
-## После генерации
+## After generation
 
-Выведи полный путь к созданному файлу и имя класса.
+Print the full path to the created file and the class name.

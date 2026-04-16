@@ -1,74 +1,73 @@
 ---
 name: lang-files
 description: >
-  Создаёт lang-файлы с языковыми переменными.
-  Используй каждый раз, когда в файл модуля, компонента или js-расширения добавляется
-  пользовательский текст: сообщения, лейблы, заголовки, ошибки.
-argument-hint: "[путь к файлу или описание]"
+  Creates lang files with language variables.
+  Use whenever user-facing text is added to a module, component, or JS extension file:
+  messages, labels, headings, errors.
+argument-hint: "[file path or description]"
 allowed-tools: Bash Glob Read Write
 ---
 
-Создай lang-файл(ы) для: $ARGUMENTS
+Create lang file(s) for: $ARGUMENTS
 
-## Общие правила
+## General rules
 
-- Lang-файлы всегда хранятся в подпапке `lang/ru/`
-- Каждый ключ — строка вида `$MESS["VENDOR_MODULE_KEY"] = "Значение";`
-- Ключи в UPPER_SNAKE_CASE, с префиксом из кода модуля/компонента
-- Никакого PHP-кода внутри, только массив `$MESS`
-- Открывающий тег `<?php` без закрывающего `?>`
+- Lang files always live in the `lang/ru/` subdirectory
+- Each key is a line like `$MESS["VENDOR_MODULE_KEY"] = "Value";`
+- Keys in UPPER_SNAKE_CASE, prefixed with the module/component code
+- No PHP logic inside — only the `$MESS` array
+- Opening `<?php` tag, no closing `?>`
 
-## Правила по типу артефакта
+## Rules by artifact type
 
-### Модуль и классы PHP
+### Module and PHP classes
 
-Каждый PHP-файл получает **собственный** lang-файл по зеркальному пути внутри `lang/ru/`:
+Each PHP file gets its **own** lang file at the mirrored path inside `lang/ru/`:
 
-| PHP-файл                       | Lang-файл                              |
+| PHP file                       | Lang file                              |
 |--------------------------------|----------------------------------------|
 | `lib/Service/OrderService.php` | `lang/ru/lib/Service/OrderService.php` |
 | `install/index.php`            | `lang/ru/install/index.php`            |
 
-Загрузка в PHP-файле:
+Loading in the PHP file:
 
 ```php
 use Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 ```
 
-### Компонент
+### Component
 
-Каждый PHP-файл компонента получает **собственный** lang-файл по зеркальному пути внутри `lang/ru/`:
+Each PHP file of the component gets its **own** lang file at the mirrored path inside `lang/ru/`:
 
-| PHP-файл                          | Lang-файл                                 |
+| PHP file                          | Lang file                                 |
 |-----------------------------------|-------------------------------------------|
 | `class.php`                       | `lang/ru/class.php`                       |
 | `templates/.default/template.php` | `lang/ru/templates/.default/template.php` |
 | `templates/.default/script.php`   | `lang/ru/templates/.default/script.php`   |
 
+### JS extension
 
-### JS-расширение
+One lang file for the entire extension: `lang/ru/config.php`.
 
-Один lang-файл на всё расширение: `lang/ru/config.php`.
-
-Использование в JS:
+Usage in JS:
 
 ```js
 BX.message('VENDOR_MODULE_KEY')
 ```
 
-## Формат lang-файла
+## Lang file format
 
 ```php
 <?php
 
-$MESS['VENDOR_MODULE_TITLE'] = 'Заголовок';
-$MESS['VENDOR_MODULE_SAVE_BUTTON'] = 'Сохранить';
-$MESS['VENDOR_MODULE_ERROR_NOT_FOUND'] = 'Запись не найдена';
+$MESS['VENDOR_MODULE_TITLE'] = 'Title';
+$MESS['VENDOR_MODULE_SAVE_BUTTON'] = 'Save';
+$MESS['VENDOR_MODULE_ERROR_NOT_FOUND'] = 'Record not found';
 ```
 
-## Именование ключей
+## Key naming
 
-- Префикс = код модуля или компонента в UPPER_SNAKE_CASE
-- Суффикс описывает контекст: `_TITLE`, `_ERROR_*`, `_BUTTON_*`, `_LABEL_*`, `_SUCCESS_*`
-- Избегай слишком общих ключей без префикса
+- Prefix = module or component code in UPPER_SNAKE_CASE
+- Suffix describes context: `_TITLE`, `_ERROR_*`, `_BUTTON_*`, `_LABEL_*`, `_SUCCESS_*`
+- Avoid overly generic keys without a prefix

@@ -1,47 +1,47 @@
 ---
 name: find-handlers
 description: >
-  Находит обработчики конкретного события в проекте. Используй когда нужно
-  узнать где и как обрабатывается событие.
-argument-hint: "[имя события] [модуль]"
+  Finds handlers for a specific event in the project. Use when you need to
+  know where and how an event is handled.
+argument-hint: "[event name] [module]"
 allowed-tools: Grep Glob Read
 ---
 
-Найди все обработчики события в проекте. Аргументы: $ARGUMENTS
+Find all handlers for the event in the project. Arguments: $ARGUMENTS
 
-## Что уточнить (если не указано в аргументах)
+## Clarify before starting (if not provided in arguments)
 
-1. **Имя события**
-2. **Модуль** — необязательно, например `main`, `crm`
+1. **Event name**
+2. **Module** — optional, e.g. `main`, `crm`
 
-## Как искать
+## How to search
 
-Обработчики регистрируются двумя способами:
+Handlers are registered in two ways:
 
-**1. Через EventManager**
+**1. Via EventManager**
 ```php
-EventManager::getInstance()->addEventHandler('модуль', 'ИмяСобытия', ...);
+EventManager::getInstance()->addEventHandler('module', 'EventName', ...);
 ```
 
-**2. Через AddEventHandler**
+**2. Via AddEventHandler**
 ```php
-AddEventHandler('модуль', 'ИмяСобытия', ...);
+AddEventHandler('module', 'EventName', ...);
 ```
 
-Ищи оба варианта только в директории `local/`.
+Search both patterns only within the `local/` directory.
 
-## Что показать в ответе
+## What to include in the response
 
-Для каждого найденного обработчика:
+For each handler found:
 
-- **Файл** и **номер строки**
-- **Callback** — имя функции, метода или замыкание (первые ~5 строк, если лямбда)
-- **Контекст** — в каком классе/методе зарегистрирован (если понятно)
+- **File** and **line number**
+- **Callback** — function name, method, or closure (first ~5 lines if lambda)
+- **Context** — which class/method it is registered in (if apparent)
 
-Если обработчиков много — сгруппируй по файлам.
+If many handlers are found — group by file.
 
-## Если ничего не найдено
+## If nothing is found
 
-Сообщи явно и предложи:
-- Проверить правильность имени события
-- Поискать по частичному совпадению (например `UserAdd` вместо `OnBeforeUserAdd`)
+State it explicitly and suggest:
+- Checking the event name for typos
+- Searching by partial match (e.g. `UserAdd` instead of `OnBeforeUserAdd`)

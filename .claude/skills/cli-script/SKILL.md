@@ -1,24 +1,23 @@
 ---
 name: cli-script
 description: >
-  Создаёт CLI-скрипт. Используй когда нужно написать PHP-скрипт,
-  запускаемый из командной строки.
-argument-hint: "[имя файла] [краткое описание]"
+  Creates a CLI script. Use when a PHP script needs to be written to run
+  from the command line.
+argument-hint: "[filename] [short description]"
 allowed-tools: Read Write Glob
 ---
 
-Создай CLI-скрипт. Аргументы: $ARGUMENTS
+Create a CLI script. Arguments: $ARGUMENTS
 
-Изучи примеры в `${CLAUDE_SKILL_DIR}/references/` — они задают стиль кода.
+Study the examples in `${CLAUDE_SKILL_DIR}/references/` — they define the expected code style.
 
-## Что уточнить (если не указано в аргументах)
+## Clarify before generating (if not provided in arguments)
 
-1. **Имя файла** — snake_case, например `sync_contacts.php`
-2. **Что делает скрипт**
-3. **Модули** — какие подключать через `Loader::includeModule`
+1. **Filename** — snake_case, e.g. `sync_contacts.php`
+2. **What the script does**
 
-Спроси всё необходимое перед генерацией.
+Ask for everything needed before generating.
 
-## После генерации
+## After generation
 
-Выведи полный путь к созданному файлу.
+Print the full path to the created file.
