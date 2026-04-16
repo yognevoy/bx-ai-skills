@@ -29,13 +29,6 @@ Each PHP file gets its **own** lang file at the mirrored path inside `lang/ru/`:
 | `lib/Service/OrderService.php` | `lang/ru/lib/Service/OrderService.php` |
 | `install/index.php`            | `lang/ru/install/index.php`            |
 
-Loading in the PHP file:
-
-```php
-use Bitrix\Main\Localization\Loc;
-Loc::loadMessages(__FILE__);
-```
-
 ### Component
 
 Each PHP file of the component gets its **own** lang file at the mirrored path inside `lang/ru/`:
