@@ -55,5 +55,6 @@ allowed-tools: Read Write Glob
 | `migrate-to-d7`   | Переписать устаревший API на D7       |
 | `event-handler`   | Создать обработчик события            |
 | `bp-activity`     | Создать активити БП                   |
+| `lang-files`      | Создать lang-файлы для локализации    |
 
 Документация: https://code.claude.com/docs/en/skills
