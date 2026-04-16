@@ -19,7 +19,6 @@
 | [`find-handlers`](.claude/skills/find-handlers/SKILL.md)   | Найти обработчики события в проекте   |
 | [`explain-module`](.claude/skills/explain-module/SKILL.md) | Объяснить назначение модуля           |
 | [`migrate-to-d7`](.claude/skills/migrate-to-d7/SKILL.md)   | Переписать устаревший API на D7       |
-| [`event-handler`](.claude/skills/event-handler/SKILL.md)   | Создать обработчик события            |
 | [`bp-activity`](.claude/skills/bp-activity/SKILL.md)       | Создать активити БП                   |
 
 ## Установка

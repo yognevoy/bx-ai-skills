@@ -53,7 +53,6 @@ allowed-tools: Read Write Glob
 | `find-handlers`   | Найти обработчики события в проекте   |
 | `explain-module`  | Объяснить назначение модуля           |
 | `migrate-to-d7`   | Переписать устаревший API на D7       |
-| `event-handler`   | Создать обработчик события            |
 | `bp-activity`     | Создать активити БП                   |
 | `lang-files`      | Создать lang-файлы для локализации    |
 
