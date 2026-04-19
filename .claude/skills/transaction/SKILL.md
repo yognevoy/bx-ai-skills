@@ -26,8 +26,14 @@ try {
 }
 ```
 
-## Rules
+## Constraints
 
-- Always re-throw the exception after rollback — never swallow it.
-- Do not wrap a single write in a transaction; it adds overhead without benefit.
-- Do not nest transactions — get the connection once and pass it down if needed.
+### MUST DO
+
+- Always re-throw the exception after rollback
+
+### MUST NOT DO
+
+- **Swallow the exception after rollback** — always re-throw; never catch without re-throwing
+- **Wrap a single write in a transaction** — adds overhead without benefit
+- **Nest transactions** — get the connection once and pass it down if needed

@@ -18,6 +18,17 @@ Study the examples in `${CLAUDE_SKILL_DIR}/references/` — they define the expe
 
 Ask for everything needed before generating.
 
+## Constraints
+
+### MUST DO
+
+- Use `exit(0)` / `exit(1)` to signal success or failure
+
+### MUST NOT DO
+
+- **Use web superglobals** (`$_GET`, `$_POST`, `$_SESSION`) — read arguments from `$argv` instead
+- **Use `die()` for flow control** — use `exit()` with an appropriate status code
+
 ## After generation
 
 Print the full path to the created file.

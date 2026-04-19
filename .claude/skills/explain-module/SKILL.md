@@ -50,6 +50,17 @@ List of events the module listens to, with a description of what each handler do
 ### Dependencies
 List of modules this module depends on.
 
+## Constraints
+
+### MUST DO
+
+- Read all specified source files before writing the explanation
+- Skip missing files gracefully — do not report an error if a file does not exist
+
+### MUST NOT DO
+
+- **Include implementation details** — focus on purpose, capabilities, and structure; not line-by-line code
+
 ## If the module is not found
 
 State it explicitly and suggest:

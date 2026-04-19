@@ -56,6 +56,18 @@ Ask for everything needed before generating.
 Find the components directory via Glob (`**/components/`) and create the `{vendor}/{component.name}/` folder
 next to existing components.
 
+## Constraints
+
+### MUST DO
+
+- Derive the PHP class name from the component code automatically
+- Create a lang file for every generated PHP file
+
+### MUST NOT DO
+
+- **Put business logic in `class.php`** — delegate to services or repositories
+- **Skip `ajax.php`** — it is always part of the skeleton even if initially empty
+
 ## After generation
 
 Print the file tree of created files and the full path to the component root.

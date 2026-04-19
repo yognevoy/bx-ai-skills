@@ -40,6 +40,18 @@ For each handler found:
 
 If many handlers are found — group by file.
 
+## Constraints
+
+### MUST DO
+
+- Search only within the `local/` directory
+- Report the file path and line number for every handler found
+- Group results by file when multiple handlers are found
+
+### MUST NOT DO
+
+- **Search in `bitrix/` or `vendor/`** — only project code in `local/` is relevant
+
 ## If nothing is found
 
 State it explicitly and suggest:

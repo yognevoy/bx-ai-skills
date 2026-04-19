@@ -54,3 +54,16 @@ Study the examples in `${CLAUDE_SKILL_DIR}/references/` — they contain paired 
 | `$_SESSION["key"]`                              | `Application::getInstance()->getSession()["key"]`     | `Session.php`      |
 | `CJSON::encode/decode` / `CUtil::PhpToJSObject` | `Json::encode` / `Json::decode`                       | `Json.php`         |
 | `MakeTimeStamp()` / `ConvertDateTime()`         | `new Date(...)` / `new DateTime(...)`                 | `DateTime.php`     |
+
+## Constraints
+
+### MUST DO
+
+- Add all required `use` imports at the top of the file after migration
+- Remove `global $APPLICATION` and `global $DB` where they are no longer needed
+- Show what was changed after the migration is complete
+
+### MUST NOT DO
+
+- **Mix legacy and D7 API in the same file** — migrate all occurrences, not just some
+- **Change business logic during migration** — replace API calls only; preserve behavior exactly

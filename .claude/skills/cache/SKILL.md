@@ -109,12 +109,19 @@ and keyed by the MD5 of the SQL query.
 
 ---
 
-## General rules
+## Constraints
 
-- Never cache `Result` objects — cache plain arrays or scalars.
-- Build cache keys with `md5(serialize([...]))` from all parameters that affect the result.
-- Cache `null` and empty arrays — avoid repeated DB hits on missing data.
-- Define TTL and path/tag as constants in the class, not inline magic values.
-- Cache only at the repository or service layer — not inside components or controllers.
-- Never cache user-specific data with a shared key — include the user ID in key and tag.
-- Do not add caching speculatively — only when the caller is on a hot path or the query is expensive.
+### MUST DO
+
+- Build cache keys with `md5(serialize([...]))` from all parameters that affect the result
+- Cache `null` and empty arrays — avoid repeated DB hits on missing data
+- Define TTL, path, and tag as constants in the class — not inline magic values
+- Cache only at the repository or service layer — not inside components or controllers
+- Include the user ID in key and tag for user-specific data
+
+### MUST NOT DO
+
+- **Cache `Result` objects** — cache plain arrays or scalars instead
+- **Use a shared cache key for user-specific data** — always include the user ID in key and tag
+- **Add caching speculatively** — only when the caller is on a hot path or the query is expensive
+- **Use managed cache for frequently updated data** — the tag-tracking overhead is not justified

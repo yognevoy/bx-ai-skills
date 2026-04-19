@@ -55,6 +55,18 @@ In `install/version.php` use the current date in `YYYY-MM-DD 09:00:00` format. G
 
 Find the modules directory via Glob (`**/modules/`) and create the `{vendor.modulename}/` folder next to existing modules.
 
+## Constraints
+
+### MUST DO
+
+- Derive namespace, class name, and constants prefix from the module code automatically
+- Get the current date with `date +%Y-%m-%d` for the version in `install/version.php`
+
+### MUST NOT DO
+
+- **Put business logic in `install/index.php`** — it must only register and unregister module components
+- **Skip lang files** — `lang/ru/install/index.php` is always required
+
 ## After generation
 
 Print the file tree of created files and the full path to the module root.

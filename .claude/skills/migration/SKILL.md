@@ -43,21 +43,34 @@ if a suitable Helper exists. Access via `$this->getHelperManager()->HelperName()
 
 Main helpers:
 
-| Method             | What it does                                                      |
-|--------------------|-------------------------------------------------------------------|
+| Method             | What it does                                                        |
+|--------------------|---------------------------------------------------------------------|
 | `UserTypeEntity()` | UF fields: `saveUserTypeEntity()`, `deleteUserTypeEntityIfExists()` |
-| `Agent()`          | Agents: `saveAgent()`, `deleteAgentIfExists()`                    |
-| `Option()`         | Module options: `saveOption()`, `deleteOptions()`                 |
-| `Event()`          | Mail events and templates                                         |
-| `UserGroup()`      | Groups: `saveGroup()`, `getGroupId()`                             |
-| `IBlock()`         | Iblocks, types, properties                                        |
-| `HLBlock()`        | HL-blocks                                                         |
+| `Agent()`          | Agents: `saveAgent()`, `deleteAgentIfExists()`                      |
+| `Option()`         | Module options: `saveOption()`, `deleteOptions()`                   |
+| `Event()`          | Mail events and templates                                           |
+| `UserGroup()`      | Groups: `saveGroup()`, `getGroupId()`                               |
+| `IBlock()`         | Iblocks, types, properties                                          |
+| `HLBlock()`        | HL-blocks                                                           |
 
 If a suitable Helper exists — use it instead of direct API calls.
 
 ## Where to save
 
 Find the migrations directory via Glob (`**/migrations/PROJ_*.php`) and save next to existing files.
+
+## Constraints
+
+### MUST DO
+
+- Get the current timestamp with `date +%Y%m%d%H%M%S` for the filename — never hardcode it
+- Read the current module version from `sprint.migration/install/version.php` before filling `$moduleVersion`
+- Check for an existing Helper before writing raw API calls
+
+### MUST NOT DO
+
+- **Write raw API calls when a Helper exists** — always prefer `$this->getHelperManager()->HelperName()`
+- **Hardcode the module version** — always read it from `version.php`
 
 ## After generation
 

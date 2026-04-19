@@ -64,3 +64,15 @@ $MESS['VENDOR_MODULE_ERROR_NOT_FOUND'] = 'Record not found';
 - Prefix = module or component code in UPPER_SNAKE_CASE
 - Suffix describes context: `_TITLE`, `_ERROR_*`, `_BUTTON_*`, `_LABEL_*`, `_SUCCESS_*`
 - Avoid overly generic keys without a prefix
+
+## Constraints
+
+### MUST DO
+
+- Place every lang file in `lang/ru/` mirroring the PHP file path
+- Prefix every key with the module or component code in UPPER_SNAKE_CASE
+
+### MUST NOT DO
+
+- **Use generic keys without a prefix** — every key must be prefixed with the module/component code
+- **Share one lang file across multiple PHP files** — each PHP file gets its own mirrored lang file

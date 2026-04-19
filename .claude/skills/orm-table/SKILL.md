@@ -74,6 +74,18 @@ public static function getCases(): array
 }
 ```
 
+## Constraints
+
+### MUST DO
+
+- Derive the DB table name automatically from the module code and entity name
+- Always include a primary key field with `configurePrimary()` and `configureAutocomplete()`
+- Use `getCases()` from an Enum for all `EnumField` values — never hardcode string arrays
+
+### MUST NOT DO
+
+- **Put business logic in the table class** — DataManager is a data layer; services and repositories go in `lib/`
+
 ## After generation
 
 Remind the user to choose one of:

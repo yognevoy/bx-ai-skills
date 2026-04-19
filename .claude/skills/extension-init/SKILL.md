@@ -85,6 +85,17 @@ Ask for everything needed before generating.
 
 Find the JS extensions directory via Glob (`**/local/js/`) and create the extension folder inside it.
 
+## Constraints
+
+### MUST DO
+
+- Wrap initialization in `BX.ready()`
+
+### MUST NOT DO
+
+- **Put business logic in `index.js`** — it only registers the namespace and calls `create()`
+- **Skip `lang/ru/config.php`** — always create it, even as an empty placeholder
+
 ## After generation
 
 Print the file tree of created files and the full path to the extension root.

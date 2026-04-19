@@ -26,8 +26,15 @@ try {
 }
 ```
 
-## Rules
+## Constraints
 
-- Never catch and silently swallow — either log, re-throw, or return a meaningful result.
-- Never use `\Exception` as a catch-all — use `\Throwable` (catches PHP errors too).
-- Don't add `try/catch` for code paths that cannot throw.
+### MUST DO
+
+- Catch specific exceptions before general ones; `\Throwable` is always last
+- Always log, re-throw, or return a meaningful result from every catch block
+
+### MUST NOT DO
+
+- **Silently swallow exceptions** — every catch block must log, re-throw, or return a meaningful result
+- **Use `\Exception` as a catch-all** — use `\Throwable` (catches PHP errors too)
+- **Add `try/catch` for code that cannot throw** — only wrap code paths that actually throw

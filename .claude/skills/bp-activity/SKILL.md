@@ -43,12 +43,12 @@ local/activities/{namespace}/{activityname}/
 
 ### Naming
 
-| Entity           | Rule                                                    | Example                       |
-|------------------|---------------------------------------------------------|-------------------------------|
-| Directory name   | lowercase, concatenated, with `activity` suffix         | `sendnotificationactivity`    |
-| PHP class name   | `CBP` + CamelCase + `Activity`                          | `CBPSendNotificationActivity` |
-| `CLASS` value    | CamelCase + `Activity` (without `CBP`)                  | `SendNotificationActivity`    |
-| Lang prefix      | `BP` + initials of the activity name words + `_`        | `BPSNA_`                      |
+| Entity         | Rule                                             | Example                       |
+|----------------|--------------------------------------------------|-------------------------------|
+| Directory name | lowercase, concatenated, with `activity` suffix  | `sendnotificationactivity`    |
+| PHP class name | `CBP` + CamelCase + `Activity`                   | `CBPSendNotificationActivity` |
+| `CLASS` value  | CamelCase + `Activity` (without `CBP`)           | `SendNotificationActivity`    |
+| Lang prefix    | `BP` + initials of the activity name words + `_` | `BPSNA_`                      |
 
 ### Lang prefix
 
@@ -71,18 +71,18 @@ Formed from the uppercase initials of the activity name words:
 
 ## Field types (`getPropertiesMap`)
 
-| Type       | Description                                              | Extra keys                                |
-|------------|----------------------------------------------------------|-------------------------------------------|
-| `string`   | Arbitrary string, supports document field substitution   | `Default`                                 |
-| `text`     | Multi-line text                                          | `Default`                                 |
-| `bool`     | Checkbox, value `'Y'` / `'N'`                            | `Default` (`'Y'` or `'N'`)                |
-| `int`      | Integer                                                  | `Default`                                 |
-| `double`   | Decimal number                                           | `Default`                                 |
-| `select`   | Dropdown list                                            | `Options` (array), `Multiple`, `Default`  |
-| `user`     | User selection from org structure                        | `Multiple`                                |
-| `date`     | Date                                                     | `Default`                                 |
-| `datetime` | Date and time                                            | `Default`                                 |
-| `file`     | File                                                     | —                                         |
+| Type       | Description                                            | Extra keys                               |
+|------------|--------------------------------------------------------|------------------------------------------|
+| `string`   | Arbitrary string, supports document field substitution | `Default`                                |
+| `text`     | Multi-line text                                        | `Default`                                |
+| `bool`     | Checkbox, value `'Y'` / `'N'`                          | `Default` (`'Y'` or `'N'`)               |
+| `int`      | Integer                                                | `Default`                                |
+| `double`   | Decimal number                                         | `Default`                                |
+| `select`   | Dropdown list                                          | `Options` (array), `Multiple`, `Default` |
+| `user`     | User selection from org structure                      | `Multiple`                               |
+| `date`     | Date                                                   | `Default`                                |
+| `datetime` | Date and time                                          | `Default`                                |
+| `file`     | File                                                   | —                                        |
 
 Every entry in `getPropertiesMap` must include:
 
@@ -90,3 +90,15 @@ Every entry in `getPropertiesMap` must include:
 - `FieldName` — snake_case, unique within the activity
 - `Type` — type from the table above
 - `Required` — `true` or `false`
+
+## Constraints
+
+### MUST DO
+
+- Return `CBPActivityExecutionStatus::Closed` on success and `CBPActivityExecutionStatus::Faulting` on error from
+  `Execute()`
+- Initialize all properties in `__construct()` with default values
+
+### MUST NOT DO
+
+- Do not access properties via `$this->arProperties['key']` — use the magic getter `$this->propertyName` instead
