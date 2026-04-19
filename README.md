@@ -22,6 +22,7 @@
 | [`bp-activity`](.claude/skills/bp-activity/SKILL.md)       | Создать активити БП                   |
 | [`cache`](.claude/skills/cache/SKILL.md)                   | Добавить кэширование                  |
 | [`transaction`](.claude/skills/transaction/SKILL.md)       | Обернуть операции в транзакцию        |
+| [`error-handling`](.claude/skills/error-handling/SKILL.md) | Обработка ошибок и исключений         |
 
 ## Установка
 
