@@ -21,6 +21,7 @@
 | [`migrate-to-d7`](.claude/skills/migrate-to-d7/SKILL.md)   | Переписать устаревший API на D7       |
 | [`bp-activity`](.claude/skills/bp-activity/SKILL.md)       | Создать активити БП                   |
 | [`cache`](.claude/skills/cache/SKILL.md)                   | Добавить кэширование                  |
+| [`transaction`](.claude/skills/transaction/SKILL.md)       | Обернуть операции в транзакцию        |
 
 ## Установка
 
