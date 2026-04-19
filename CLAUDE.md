@@ -58,5 +58,6 @@ allowed-tools: Read Write Glob
 | `lang-files`     | Создать lang-файлы для локализации    |
 | `cache`          | Добавить кэширование                  |
 | `transaction`    | Обернуть операции в транзакцию        |
+| `error-handling` | Обработка ошибок и исключений         |
 
 Документация: https://code.claude.com/docs/en/skills
