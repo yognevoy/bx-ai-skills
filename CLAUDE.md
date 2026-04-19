@@ -57,5 +57,6 @@ allowed-tools: Read Write Glob
 | `bp-activity`    | Создать активити БП                   |
 | `lang-files`     | Создать lang-файлы для локализации    |
 | `cache`          | Добавить кэширование                  |
+| `transaction`    | Обернуть операции в транзакцию        |
 
 Документация: https://code.claude.com/docs/en/skills
