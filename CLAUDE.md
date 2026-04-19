@@ -43,18 +43,19 @@ allowed-tools: Read Write Glob
 
 ## Доступные скиллы
 
-| Скилл             | Описание                              |
-|-------------------|---------------------------------------|
-| `orm-table`       | Создать класс ORM DataManager таблицы |
-| `cli-script`      | Создать CLI-скрипт (php script.php)   |
-| `migration`       | Создать миграцию sprint.migration     |
-| `module-init`     | Создать скелет модуля                 |
-| `component-init`  | Создать скелет компонента             |
-| `extension-init`  | Создать скелет JS-расширения          |
-| `find-handlers`   | Найти обработчики события в проекте   |
-| `explain-module`  | Объяснить назначение модуля           |
-| `migrate-to-d7`   | Переписать устаревший API на D7       |
-| `bp-activity`     | Создать активити БП                   |
-| `lang-files`      | Создать lang-файлы для локализации    |
+| Скилл            | Описание                              |
+|------------------|---------------------------------------|
+| `orm-table`      | Создать класс ORM DataManager таблицы |
+| `cli-script`     | Создать CLI-скрипт (php script.php)   |
+| `migration`      | Создать миграцию sprint.migration     |
+| `module-init`    | Создать скелет модуля                 |
+| `component-init` | Создать скелет компонента             |
+| `extension-init` | Создать скелет JS-расширения          |
+| `find-handlers`  | Найти обработчики события в проекте   |
+| `explain-module` | Объяснить назначение модуля           |
+| `migrate-to-d7`  | Переписать устаревший API на D7       |
+| `bp-activity`    | Создать активити БП                   |
+| `lang-files`     | Создать lang-файлы для локализации    |
+| `cache`          | Добавить кэширование                  |
 
 Документация: https://code.claude.com/docs/en/skills
